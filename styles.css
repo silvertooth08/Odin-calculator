@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarpanch:wght@600&display=swap');
+header > h1 {
+    text-align: center;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.calculator-outline{
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(var(4,auto));
+    width: 20rem;
+    height: 30rem;
+    gap:5px;
+    background: rgb(100, 155, 38);
+    justify-content: center;
+    margin-left:40%;
+    border: slateblue solid 5px;
+    border-radius: 8px;
+    padding-top: 0.5rem;
+    
+}
+.calculator-display{
+    font-family: 'Sarpanch', sans-serif;;
+    width: 18rem;
+    height: 3.5rem;
+    border-radius: 5px;
+    border: solid sandybrown 3px;
+    align-self: center ;
+    background: rgb(120, 201, 201);
+    text-align: end;
+    line-height: 225%;
+    padding-right: 0.4rem;
+    font-size: xx-large;
+}
+.calculator-buttons{
+    width: 4rem;
+    height: 4rem;
+    background:palevioletred ;
+    text-align: center;
+    line-height:90%;
+    border-radius: 5px;
+    font-size: 2rem;
+    padding: 0px;
+}
+.calculator-buttons>img {
+    align-self: center;
+    height: 3rem;
+    width: 3rem;
+    object-fit: contain;
+    
+}
