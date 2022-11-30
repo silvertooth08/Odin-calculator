@@ -84,3 +84,32 @@ function divide (a,b){
    };
 }
 updateDisplay();
+
+let selectedNumber = null
+let numberQueue = [];
+let operation = '';
+
+function selectNumber(number){
+    selectedNumber = number
+}
+
+function add(){
+    operation = 'add';
+    numberQueue.push(selectedNumber)
+}
+function clear(){
+    operation = null;
+    numberQueue = []
+}
+function equals(){
+    if(operation === 'add'){
+        numberQueue.push(selectedNumber);
+        const [a, b] = numberQueue;
+        return a + b;
+    }
+    clear();
+}
+
+selectNumber(1)
+add();
+selectNumber(2)
