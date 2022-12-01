@@ -17,25 +17,60 @@ multiplyButton.addEventListener('click',multiply);
 const divideButton = document.querySelector('.divide');
 divideButton.addEventListener('click',divide);
 
-// const decimalButton = document.querySelector('.decimal');
-// decimalButton.addEventListener('click',decimal);
+const decimalButton = document.querySelector('.decimal');
+decimalButton.addEventListener('click',decimal);
 
-// const negativeButton = document.querySelector('.negative');
-// negativeButton.addEventListener('click',negative);
+function decimal () {
+   let checkDecimal = Array.from(displayValue)
 
-// const backspaceButton = document.querySelector('.backspace');
-// backspaceButton.addEventListener('click',backspace);
+   console.log(typeof displayValue)
+   console.log(typeof checkDecimal)
+   console.log(checkDecimal)
+    if (!checkDecimal.includes(".")){
+        checkDecimal.push('.');
+        displayValue = checkDecimal.join("")
+        return displayValue
+    }
+    if (checkDecimal.includes(".")) {
+        return console.log( displayValue.toString())
+    }
+ 
+}
 
-// const clearAllButton  = document.querySelector('.clear');
-// clearAllButton.addEventListener('click',clearAll)
+//decimal();
+
+const negativeButton = document.querySelector('.negative');
+negativeButton.addEventListener('click',negative);
+
+function negative() {
+ let negativeOf = parseInt(displayValue)
+ return displayValue = (negativeOf*-1).toString;
+}
+
+
+const backspaceButton = document.querySelector('.backspace');
+backspaceButton.addEventListener('click',backspace);
+
+function backspace () {
+ return displayValue.pop()
+}
+//backspace()
+
+const clearAllButton  = document.querySelector('.clear');
+clearAllButton.addEventListener('click',clearAll)
+
+
+function clearAll(){
+    
+}
 
 operate();
 
-let displayValue = '';
+let displayValue = [];
 // defining operation functions
 function operate (a,b){
-    a = parseInt(a);
-    b = parseInt(b);
+    firstParam = parseInt(a);
+    secondParam = parseInt(b);
     switch (true) {
         case '+':
         sum();
@@ -52,6 +87,8 @@ function operate (a,b){
     }
 
 }
+
+
 
 function sum(a,b) {
  a = parseInt(calculatorDisplay.innerText);
@@ -80,36 +117,10 @@ function divide (a,b){
  const calculatorDisplay = document.querySelector('.calculator-display');
  function updateDisplay () {
     if(!displayValue === '') {
-     return  calculatorDisplay.innerText += displayValue;
+     return  displayValue
    };
+   if (displayValue.length != [...calculatorDisplay.innerText].length){
+    return updateDisplay()
+   }
 }
 updateDisplay();
-
-let selectedNumber = null
-let numberQueue = [];
-let operation = '';
-
-function selectNumber(number){
-    selectedNumber = number
-}
-
-function add(){
-    operation = 'add';
-    numberQueue.push(selectedNumber)
-}
-function clear(){
-    operation = null;
-    numberQueue = []
-}
-function equals(){
-    if(operation === 'add'){
-        numberQueue.push(selectedNumber);
-        const [a, b] = numberQueue;
-        return a + b;
-    }
-    clear();
-}
-
-selectNumber(1)
-add();
-selectNumber(2)
