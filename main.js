@@ -65,12 +65,24 @@ clearAllButton.addEventListener('click',clearAll)
 // clear all
 
 function clearAll(){
-    displayValue = ''
+    cachedValue = '';
+    displayValue = '';
+    return calculatorDisplay.innerText = displayValue;
+}
+//clear only current display screen
+
+
+const clearCurrentButton = document.querySelector('.clearCurrent');
+clearCurrentButton.addEventListener('click',clearCurrent);
+
+function clearCurrent() {
+    displayValue = '';
     return calculatorDisplay.innerText = displayValue;
 }
 
-// operate();
 
+// operate();
+let cachedValue = [];
 let displayValue = [];
 // defining operation functions
 // function operate (a,b){
@@ -95,9 +107,11 @@ let displayValue = [];
 
 
 
-function sum(a,b) {
- a = parseFloat(displayValue.join(""));
-    return calculatorDisplay.innerText = a + b;
+function sum() {
+ cachedValue = parseFloat(displayValue.join(""));
+ console.
+ displayValue= ''
+    return calculatorDisplay.innerText = displayValue
 }
 
 function subtract (a,b) {
