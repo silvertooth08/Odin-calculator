@@ -20,6 +20,7 @@ divideButton.addEventListener('click',divide);
 const decimalButton = document.querySelector('.decimal');
 decimalButton.addEventListener('click',decimal);
 
+//decimal();
 
 function decimal () {
    let checkDecimal = Array.from(displayValue)
@@ -33,14 +34,16 @@ function decimal () {
     }
 }
 
-//decimal();
+// negative
 
 const negativeButton = document.querySelector('.negative');
 negativeButton.addEventListener('click',negative);
 
 function negative() {
- let negativeOf = parseInt(displayValue)
- return displayValue = (negativeOf*-1).toString;
+ let negativeOf = parseFloat(displayValue)
+  negativeOf = (negativeOf*-1).toString()
+  displayValue = negativeOf;
+  return calculatorDisplay.innerText = displayValue;
 }
 
 
@@ -92,7 +95,7 @@ let displayValue = [];
 
 
 function sum(a,b) {
- a = parseInt(displayValue.join(""));
+ a = parseFloat(displayValue.join(""));
     return calculatorDisplay.innerText = a + b;
 }
 
