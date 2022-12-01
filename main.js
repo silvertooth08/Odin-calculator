@@ -23,17 +23,13 @@ decimalButton.addEventListener('click',decimal);
 // FIX decimal not showing immediately on screen
 function decimal () {
    let checkDecimal = Array.from(displayValue)
-
-   console.log(typeof displayValue)
-   console.log(typeof checkDecimal)
-   console.log(checkDecimal)
     if (!checkDecimal.includes(".")){
         checkDecimal.push('.');
         displayValue = checkDecimal.join("")
         return displayValue
     }
     if (checkDecimal.includes(".")) {
-        return console.log( displayValue.toString())
+        return displayValue
     }
 }
 
@@ -51,8 +47,13 @@ function negative() {
 const backspaceButton = document.querySelector('.backspace');
 backspaceButton.addEventListener('click',backspace);
 
+// FIX  backspace now showing immadiately on screen
 function backspace () {
- return displayValue.pop()
+    console.log([...displayValue])
+   let backspacedDisplay = [...displayValue]
+   backspacedDisplay.pop()
+   displayValue = backspacedDisplay.join("")
+ return (displayValue)
 }
 //backspace()
 
@@ -64,34 +65,34 @@ function clearAll(){
     
 }
 
-operate();
+// operate();
 
 let displayValue = [];
 // defining operation functions
-function operate (a,b){
-    firstParam = parseInt(a);
-    secondParam = parseInt(b);
-    switch (true) {
-        case '+':
-        sum();
-        break;
-        case '-':
-        subtract();
-        break;
-        case 'x':
-        multiply()
-        break;
-        case '/':
-        divide();
-        break;
-    }
+// function operate (a,b){
+//     firstParam = parseInt(a);
+//     secondParam = parseInt(b);
+//     switch (true) {
+//         case '+':
+//         sum();
+//         break;
+//         case '-':
+//         subtract();
+//         break;
+//         case 'x':
+//         multiply()
+//         break;
+//         case '/':
+//         divide();
+//         break;
+//     }
 
-}
+// }
 
 
 
 function sum(a,b) {
- a = parseInt(calculatorDisplay.innerText);
+ a = parseInt(displayValue.join(""));
     return calculatorDisplay.innerText = a + b;
 }
 
@@ -117,7 +118,9 @@ function divide (a,b){
  const calculatorDisplay = document.querySelector('.calculator-display');
  function updateDisplay () {
     if(!displayValue === '') {
-     return  displayValue
+     return calculatorDisplay.innerText = displayValue
+   }else {
+    displayValue = ''
    };
    if (displayValue.length != [...calculatorDisplay.innerText].length){
     return updateDisplay()
