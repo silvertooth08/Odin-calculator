@@ -52,7 +52,6 @@ backspaceButton.addEventListener('click',backspace);
 
 
 function backspace () {
-    console.log([...displayValue])
    let backspacedDisplay = [...displayValue]
    backspacedDisplay.pop()
    displayValue = backspacedDisplay.join("")
@@ -60,12 +59,14 @@ function backspace () {
 }
 //backspace()
 
-const clearAllButton  = document.querySelector('.clear');
+const clearAllButton  = document.querySelector('.clearAll');
 clearAllButton.addEventListener('click',clearAll)
 
+// clear all
 
 function clearAll(){
-    
+    displayValue = ''
+    return calculatorDisplay.innerText = displayValue;
 }
 
 // operate();
@@ -122,11 +123,13 @@ function divide (a,b){
  function updateDisplay () {
     if(!displayValue === '') {
      return calculatorDisplay.innerText = displayValue
-   }else {
-    displayValue = ''
-   };
-   if (displayValue.length != [...calculatorDisplay.innerText].length){
-    return updateDisplay()
    }
+// FIX: try to implement display starting with 0 and 0 becoming uneffective in first digits unless decimal
+//    if (displayValue === 0 || displayValue === '0'){
+//     let handleZero = [... displayValue]
+//     displayValue = handleZero.shift().join("")
+//     console.log(handleZero)
+//     return calculatorDisplay.innerText = displayValue;
+//    }
 }
 updateDisplay();
