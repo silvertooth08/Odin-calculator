@@ -20,6 +20,7 @@ divideButton.addEventListener('click',divide);
 const decimalButton = document.querySelector('.decimal');
 decimalButton.addEventListener('click',decimal);
 
+// FIX decimal not showing immediately on screen
 function decimal () {
    let checkDecimal = Array.from(displayValue)
 
@@ -34,7 +35,6 @@ function decimal () {
     if (checkDecimal.includes(".")) {
         return console.log( displayValue.toString())
     }
- 
 }
 
 //decimal();
