@@ -20,16 +20,16 @@ divideButton.addEventListener('click',divide);
 const decimalButton = document.querySelector('.decimal');
 decimalButton.addEventListener('click',decimal);
 
-// FIX decimal not showing immediately on screen
+
 function decimal () {
    let checkDecimal = Array.from(displayValue)
     if (!checkDecimal.includes(".")){
         checkDecimal.push('.');
         displayValue = checkDecimal.join("")
-        return displayValue
+        return  calculatorDisplay.innerText = displayValue;
     }
     if (checkDecimal.includes(".")) {
-        return displayValue
+        return  calculatorDisplay.innerText = displayValue;
     }
 }
 
@@ -47,13 +47,13 @@ function negative() {
 const backspaceButton = document.querySelector('.backspace');
 backspaceButton.addEventListener('click',backspace);
 
-// FIX  backspace now showing immadiately on screen
+
 function backspace () {
     console.log([...displayValue])
    let backspacedDisplay = [...displayValue]
    backspacedDisplay.pop()
    displayValue = backspacedDisplay.join("")
- return (displayValue)
+ return calculatorDisplay.innerText = displayValue;
 }
 //backspace()
 
