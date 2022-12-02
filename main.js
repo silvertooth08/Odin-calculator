@@ -78,61 +78,63 @@ clearCurrentButton.addEventListener('click',clearCurrent);
 function clearCurrent() {
     displayValue = '';
     return calculatorDisplay.innerText = displayValue;
-}
-
-
-// operate();
-let cachedValue = [];
+};
+let cachedValue = parseFloat(0)
 let displayValue = [];
-// defining operation functions
-// function operate (a,b){
-//     firstParam = parseInt(a);
-//     secondParam = parseInt(b);
-//     switch (true) {
-//         case '+':
-//         sum();
-//         break;
-//         case '-':
-//         subtract();
-//         break;
-//         case 'x':
-//         multiply()
-//         break;
-//         case '/':
-//         divide();
-//         break;
-//     }
-
-// }
-
 
 
 function sum() {
- cachedValue = parseFloat(displayValue.join(""));
- console.
- displayValue= ''
+    if(displayValue){
+    cachedValue += parseFloat(displayValue);
+   
+    displayValue = ''
+    }
     return calculatorDisplay.innerText = displayValue
 }
 
-function subtract (a,b) {
-    return a - b;
+function subtract () {
+    if(displayValue) {
+        cachedValue -= parseFloat(displayValue);
+        displayValue =''
+    }
+    return calculatorDisplay.innerText = displayValue
 }
 
-function multiply (a,b) {
-    return a * b;
+function multiply () {
+    if (cachedValue) {
+        cachedValue = cachedValue*parseFloat(displayValue)
+        displayValue = ''
+        console.log(cachedValue)
+    }
+    if (displayValue && !cachedValue){
+        cachedValue = parseFloat(displayValue);
+        console.log(cachedValue)
+        displayValue= ''
+    }
+
+   return calculatorDisplay.innerText = displayValue
 }
 
-function divide (a,b){
-    if ( b === 0 ) {
-        return 'lol'
-    }else return a/b;
-}
-// divide by zero protection 
-
- //if ()
+function divide (){
+    if (cachedValue){
+        if ( parseFloat(displayValue) === 0 ) {
+            playSound();
+            return calculatorDisplay.innerText ='EXTERMINATE!!'
+        }else{
+            cachedValue = cachedValue / parseFloat(displayValue);
+            displayValue = '';    
+        }
+    } 
+        if (displayValue) {
+        cachedValue = parseFloat(displayValue);
+        displayValue = '';
+    } 
+    return calculatorDisplay.innerText = displayValue
+    
+    } 
 
  // calculator display
-
+ // FIX : calculator display shall not show more than 15 digits!
  const calculatorDisplay = document.querySelector('.calculator-display');
  function updateDisplay () {
     if(!displayValue === '') {
@@ -147,3 +149,9 @@ function divide (a,b){
 //    }
 }
 updateDisplay();
+
+
+function playSound () {
+  const audio = document.getElementById('dividebyzeroSound')
+  audio.play();
+}
