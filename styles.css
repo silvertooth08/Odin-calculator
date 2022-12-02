@@ -26,7 +26,9 @@ body{
     padding-top: 0.5rem;
     
 }
-.calculator-display{
+.calculator-display-container{
+    display: flex;
+    flex-direction: column;
     font-family: 'Sarpanch', sans-serif;;
     width: 18rem;
     height: 3.5rem;
@@ -35,9 +37,20 @@ body{
     align-self: center ;
     background: rgb(120, 201, 201);
     text-align: end;
-    line-height: 225%;
+    line-height: 80%;
     padding-right: 0.4rem;
     font-size: xx-large;
+}
+.cached-display{
+    
+    font-size: large;
+    color:rgb(136, 133, 133);
+    width: 18rem;
+    height: 1.75rem;
+}
+.calculator-display{
+    width: 18rem;
+    height: 1.75rem;
 }
 .calculator-buttons{
     width: 4rem;
