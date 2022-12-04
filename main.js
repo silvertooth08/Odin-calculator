@@ -3,11 +3,16 @@ const buttons = document.querySelectorAll('.digit')
 buttons.forEach((button)=> button.addEventListener('click',getButtonValue));
 function getButtonValue(e) {
     if(cachedValue){
-        displayValue = ''
+        displayValue = '0';
+    }
+    if(displayValue === '0' || displayValue === 0){
+        displayValue = displayValue.slice(1);
+        console.log(displayValue)
     }
     displayValue += (e.target.value)
     calculatorDisplay.innerText = displayValue;
 };
+
 
 //decimal 
 
@@ -45,8 +50,12 @@ backspaceButton.addEventListener('click',backspace);
 
 
 function backspace () {
-   let backspacedDisplay = [...displayValue]
-   backspacedDisplay.pop()
+    let backspacedDisplay = [...displayValue]
+    backspacedDisplay.pop()
+    console.log(backspacedDisplay)
+    if(backspacedDisplay.length === 0){
+        return displayValue === '0'
+    }
    displayValue = backspacedDisplay.join("")
  return calculatorDisplay.innerText = displayValue;
 }
@@ -57,10 +66,11 @@ const clearAllButton  = document.querySelector('.clearAll');
 clearAllButton.addEventListener('click',clearAll)
 
 function clearAll(){
-    cachedValue = '';
-    displayValue = '';
-    updateDisplay();
-    return calculatorDisplay.innerText = displayValue;
+    cachedValue = ''
+    cachedDisplay.innerText = cachedValue
+    displayValue= '0';
+    calculatorDisplay.innerText = displayValue
+   
 }
 
 //clear only current display screen
@@ -69,10 +79,10 @@ const clearCurrentButton = document.querySelector('.clearCurrent');
 clearCurrentButton.addEventListener('click',clearCurrent);
 
 function clearCurrent() {
-    displayValue = '';
-    updateDisplay();
+    displayValue = '0'
     return calculatorDisplay.innerText = displayValue;
 };
+
 let cachedValue = parseFloat(0)
 let displayValue = [];
 
@@ -171,21 +181,18 @@ return calculatorDisplay.innerText = displayValue
  const calculatorDisplay = document.querySelector('.calculator-display');
  const cachedDisplay = document.querySelector('.cached-display')
  function updateDisplay () {
+    // if(displayValue.length == 0){
+    //     displayValue = '0';
+    // }
     if(!displayValue === '') {
-    calculatorDisplay.innerText = displayValue
+    calculatorDisplay.innerText = displayValue.substring(0,14);
     }
     if(!displayValue.length){
         cachedDisplay.innerText = cachedValue;
     }
-// FIX: try to implement display starting with 0 and 0 becoming uneffective in first digits unless decimal
-//    if (displayValue === 0 || displayValue === '0'){
-//     let handleZero = [... displayValue]
-//     displayValue = handleZero.shift().join("")
-//     console.log(handleZero)
-//     return calculatorDisplay.innerText = displayValue;
-//    }
+
 }
-updateDisplay();
+
 
 
 function playSound () {
