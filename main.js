@@ -78,15 +78,15 @@ function clearCurrent() {
     return calculatorDisplay.innerText = displayValue;
 };
 
-let cachedValue = '';
-let displayValue = '';
-let operator = '';
+let cachedValue = parseFloat(0)
+let displayValue = [];
 
 // operations
 let operators = document.querySelectorAll('.operator')
 operators.forEach((operator) => operator.addEventListener('click',function (e){
-    handleOperator(e.target.textContent)
+    operation(e.target.textContent)
 }))
+
 function handleOperator(op) {
     operator = op;
     displayValue = Number(displayValue)
@@ -101,6 +101,10 @@ function handleOperator(op) {
      cachedValue *= displayValue;
     }
     if(operator === '/'){
+        if ((displayValue) === 0 ) {
+        playSound();
+        return calculatorDisplay.innerText ='EXTERMINATE!!'
+        }
      cachedValue /= displayValue;
     }
     if (operator === null){
@@ -108,7 +112,6 @@ function handleOperator(op) {
     }
  updateDisplay()
 }
-
 
 
 // // summation
@@ -194,24 +197,10 @@ const equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click',equals)
 
 function equals(){
-    displayValue = Number(displayValue)
-    cachedValue = Number(cachedValue)
-    if(operator === '+'){
-     cachedValue += displayValue;
-    }
-    if(operator === '-'){
-     cachedValue -= displayValue;
-    }
-    if(operator === 'x'){
-     cachedValue *= displayValue;
-    }
-    if(operator === '/'){
-     cachedValue /= displayValue;
-    }
-    if (operator == 0){
-     cachedValue = displayValue;
-    }
- updateDisplay()
+if(cachedValue == null){
+    updateDisplay()
+}
+  updateDisplay()
 }
 
 
