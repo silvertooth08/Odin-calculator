@@ -78,33 +78,35 @@ function clearCurrent() {
     return calculatorDisplay.innerText = displayValue;
 };
 
-let cachedValue = parseFloat(0)
-let displayValue = [];
+let cachedValue = '';
+let displayValue = '';
+let operator = '';
 
 // operations
 let operators = document.querySelectorAll('.operator')
 operators.forEach((operator) => operator.addEventListener('click',function (e){
-    operation(e.target.textContent)
+    handleOperator(e.target.textContent)
 }))
-function operation(operator) {
-    Number(displayValue)
-    Number(cachedValue)
-   if(operator === '+'){
-    cachedValue += displayValue;
-   }
-   if(operator === '-'){
-    cachedValue -= displayValue;
-   }
-   if(operator === 'x'){
-    cachedValue *= displayValue;
-   }
-   if(operator === '/'){
-    cachedValue /= displayValue;
-   }
-   if (operator === null){
-    cachedValue = displayValue;
-   }
-updateDisplay()
+function handleOperator(op) {
+    operator = op;
+    displayValue = Number(displayValue)
+    cachedValue = Number(cachedValue)
+    if(operator === '+'){
+     cachedValue += displayValue;
+    }
+    if(operator === '-'){
+     cachedValue -= displayValue;
+    }
+    if(operator === 'x'){
+     cachedValue *= displayValue;
+    }
+    if(operator === '/'){
+     cachedValue /= displayValue;
+    }
+    if (operator === null){
+     cachedValue = displayValue;
+    }
+ updateDisplay()
 }
 
 
@@ -192,10 +194,24 @@ const equalsButton = document.querySelector('.equals');
 equalsButton.addEventListener('click',equals)
 
 function equals(){
-if(cachedValue == null){
-    updateDisplay()
-}
-  updateDisplay()
+    displayValue = Number(displayValue)
+    cachedValue = Number(cachedValue)
+    if(operator === '+'){
+     cachedValue += displayValue;
+    }
+    if(operator === '-'){
+     cachedValue -= displayValue;
+    }
+    if(operator === 'x'){
+     cachedValue *= displayValue;
+    }
+    if(operator === '/'){
+     cachedValue /= displayValue;
+    }
+    if (operator == 0){
+     cachedValue = displayValue;
+    }
+ updateDisplay()
 }
 
 
