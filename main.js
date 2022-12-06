@@ -5,8 +5,10 @@ function getButtonValue(e) {
     if([...displayValue][0] == 0 && ![...displayValue].includes('.')){
         displayValue = displayValue.substring(1,15);
     }
-    displayValue += (e.target.value)
-    calculatorDisplay.innerText = displayValue;
+    if(displayValue.length < 12){
+        displayValue += (e.target.value)
+        calculatorDisplay.innerText = displayValue;
+    }
 };
 
 
@@ -47,13 +49,16 @@ backspaceButton.addEventListener('click',backspace);
 
 function backspace () {
     let backspacedDisplay = [...displayValue]
-    backspacedDisplay.pop()
-    console.log(backspacedDisplay)
-    if(backspacedDisplay.length === 0){
-        return displayValue === '0'
+    if(displayValue !== ''){
+        backspacedDisplay.pop()
     }
-   displayValue = backspacedDisplay.join("")
-updateDisplay()
+    displayValue = backspacedDisplay.join("")
+    if(backspacedDisplay == 0){
+        console.log('works')
+        displayValue === '0'
+       return calculatorDisplay.innerText = displayValue
+    }
+    calculatorDisplay.innerText = displayValue;
 }
 
 // clear all
@@ -78,17 +83,74 @@ function clearCurrent() {
     return calculatorDisplay.innerText = displayValue;
 };
 
-let cachedValue = parseFloat(0)
-let displayValue = [];
+let cachedValue = ''
+let displayValue = '';
+let operator = '';
 
 // operations
 let operators = document.querySelectorAll('.operator')
 operators.forEach((operator) => operator.addEventListener('click',function (e){
-    operation(e.target.textContent)
+    handleOperator(e.target.textContent)
 }))
 
 function handleOperator(op) {
     operator = op;
+    displayValue = Number(displayValue)
+    cachedValue = Number(cachedValue)
+    if(operator === '+'){
+     cachedValue += displayValue;
+     displayValue = 0
+    }
+    if(operator === '-'){
+        if (displayValue && cachedValue == null){ 
+           cachedValue = displayValue;
+           displayValue =''
+        }
+        if( displayValue && cachedValue !== null) {
+        cachedValue -= displayValue;
+         displayValue = 0
+        }
+    }
+    if(operator === 'x'){
+     cachedValue *= displayValue;
+     displayValue = 0
+    }
+    if(operator === '/'){
+        if ((displayValue) === 0 ) {
+        playSound();
+        return calculatorDisplay.innerText ='EXTERMINATE!!'
+        }
+     cachedValue /= displayValue;
+     displayValue = 0
+    }
+    // if (operator === null){
+    //  cachedValue = displayValue;
+    // }
+    displayValue = displayValue.toString()
+    cachedValue = cachedValue.toString()
+    calculatorDisplay.innerText = displayValue;
+    cachedDisplay.innerText = cachedValue;
+}
+
+
+// function subtract () {
+//     if(displayValue && cachedValue != null) {
+//         cachedValue -= parseFloat(displayValue);
+//         displayValue =''
+//     }
+//     if (cachedValue == null){
+//         cachedValue = parseFloat(displayValue);
+//         displayValue=''
+//     }
+//     updateDisplay();
+// }
+
+//equals 
+    
+const equalsButton = document.querySelector('.equals');
+equalsButton.addEventListener('click',equals)
+
+function equals(){
     displayValue = Number(displayValue)
     cachedValue = Number(cachedValue)
     if(operator === '+'){
@@ -110,117 +172,33 @@ function handleOperator(op) {
     if (operator === null){
      cachedValue = displayValue;
     }
- updateDisplay()
+    displayValue = displayValue.toString()
+    cachedValue = cachedValue.toString()
+    calculatorDisplay.innerText = displayValue;
+    cachedDisplay.innerText = cachedValue;
 }
-
-
-// // summation
-
-// const sumButton = document.querySelector('.sum');
-// sumButton.addEventListener('click',sum);
-
-// function sum() {
-//     if(displayValue && !cachedDisplay){
-//     cachedValue = parseFloat(displayValue);
-//     displayValue = '0'
-//     }
-//     if(displayValue && cachedDisplay){
-//         cachedValue += parseFloat(displayValue);
-//         displayValue = '0'
-//     }
-//     updateDisplay();
-// }
-
-// // subtraction
-
-// const subtractButton = document.querySelector('.subtract');
-// subtractButton.addEventListener('click',subtract);
-
-// function subtract () {
-//     if(displayValue && cachedValue != null) {
-//         cachedValue -= parseFloat(displayValue);
-//         displayValue =''
-//     }
-//     if (cachedValue == null){
-//         cachedValue = parseFloat(displayValue);
-//         displayValue=''
-//     }
-//     updateDisplay();
-// }
-
-// //multiplication
-
-// const multiplyButton = document.querySelector('.multiply');
-// multiplyButton.addEventListener('click',multiply);
-
-// function multiply () {
-//     if (cachedValue) {
-//         cachedValue = cachedValue*parseFloat(displayValue)
-//         displayValue = ''
-//         console.log(cachedValue)
-//     }
-//     if (displayValue && !cachedValue){
-//         cachedValue = parseFloat(displayValue);
-//         console.log(cachedValue)
-//         displayValue= ''
-//     }
-//     updateDisplay();
-//    return calculatorDisplay.innerText = displayValue
-// }
-
-// // division
-
-// const divideButton = document.querySelector('.divide');
-// divideButton.addEventListener('click',divide);
-
-// function divide (){
-//     if (cachedValue){
-//         if ( parseFloat(displayValue) === 0 ) {
-//             playSound();
-//             return calculatorDisplay.innerText ='EXTERMINATE!!'
-//         }else{
-//             cachedValue = cachedValue / parseFloat(displayValue);
-//             displayValue = '';    
-//         }
-//     } 
-//         if (displayValue) {
-//         cachedValue = parseFloat(displayValue);
-//         displayValue = '';
-//     } 
-//     updateDisplay();
-//     return calculatorDisplay.innerText = displayValue
-// } 
-
-//equals 
-    
-const equalsButton = document.querySelector('.equals');
-equalsButton.addEventListener('click',equals)
-
-function equals(){
-if(cachedValue == null){
-    updateDisplay()
-}
-  updateDisplay()
-}
-
-
-
-
  // calculator display
  // FIX : calculator display shall not show more than 15 digits!
  const calculatorDisplay = document.querySelector('.calculator-display');
  const cachedDisplay = document.querySelector('.cached-display')
  function updateDisplay () {
-    if(!displayValue === null) {
+    if(displayValue !== null) {
     calculatorDisplay.innerText = displayValue.substring(0,14);
     }
-    if(cachedValue !== null){
-        cachedDisplay.innerText = cachedValue;
-        displayValue = '0';
+    if(!cachedValue === null){
+        cachedDisplay.innerText = displayValue;
+        displayValue = '';
     }
-    calculatorDisplay.innerText = displayValue
-    cachedDisplay.innerText= cachedValue
-}
+    if(cachedValue.length < 13 || cachedValue === null){
+        calculatorDisplay.innerText = displayValue
+        cachedDisplay.innerText= cachedValue
+    }
+    if(cachedValue.length > 13){
+        cachedDisplay.innerText= Math.round(cachedValue*1000000000000/1000000000000)
+       calculatorDisplay.innerText = displayValue
+     }
+    }
+
 
 
 
