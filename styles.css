@@ -10,7 +10,8 @@ body{
     justify-content: center;
     width: 90vw;
     height: 90vh;
-    
+    background-image: url('background/Clue_Simple_Clouds.png');
+    background-size: cover;
 }
 .calculator-outline{
     display: flex;
