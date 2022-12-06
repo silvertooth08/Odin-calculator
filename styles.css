@@ -8,6 +8,8 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 90vw;
+    height: 90vh;
     
 }
 .calculator-outline{
