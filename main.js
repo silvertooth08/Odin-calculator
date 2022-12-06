@@ -95,55 +95,48 @@ operators.forEach((operator) => operator.addEventListener('click',function (e){
 
 function handleOperator(op) {
     operator = op;
-    displayValue = Number(displayValue)
-    cachedValue = Number(cachedValue)
-    if(operator === '+'){
-     cachedValue += displayValue;
-     displayValue = 0
-    }
-    if(operator === '-'){
-        if (displayValue && cachedValue == null){ 
-           cachedValue = displayValue;
-           displayValue =''
-        }
-        if( displayValue && cachedValue !== null) {
-        cachedValue -= displayValue;
-         displayValue = 0
-        }
-    }
-    if(operator === 'x'){
-     cachedValue *= displayValue;
-     displayValue = 0
-    }
-    if(operator === '/'){
-        if ((displayValue) === 0 ) {
-        playSound();
-        return calculatorDisplay.innerText ='EXTERMINATE!!'
-        }
-     cachedValue /= displayValue;
-     displayValue = 0
-    }
+    cachedValue = displayValue;
+    cachedDisplay.innerText = cachedValue 
+    displayValue ='';
+    calculatorDisplay.innerText = displayValue
+    //     displayValue = Number(displayValue)
+    // cachedValue = Number(cachedValue)
+    // if(operator === '+'){
+    //  cachedValue += displayValue;
+    //  displayValue = 0
+    // }
+    // if(operator === '-'){
+    //     if (displayValue && cachedValue == null){ 
+    //        cachedValue = displayValue;
+    //        displayValue =''
+    //     }
+    //     if( displayValue && cachedValue !== null) {
+    //     cachedValue -= displayValue;
+    //      displayValue = 0
+    //     }
+    // }
+    // if(operator === 'x'){
+    //  cachedValue *= displayValue;
+    //  displayValue = 0
+    // }
+    // if(operator === '/'){
+    //     if ((displayValue) === 0 ) {
+    //     playSound();
+    //     return calculatorDisplay.innerText ='EXTERMINATE!!'
+    //     }
+    //  cachedValue /= displayValue;
+    //  displayValue = 0
+    // }    
     // if (operator === null){
     //  cachedValue = displayValue;
     // }
-    displayValue = displayValue.toString()
-    cachedValue = cachedValue.toString()
-    calculatorDisplay.innerText = displayValue;
-    cachedDisplay.innerText = cachedValue;
+    // displayValue = displayValue.toString()
+    // cachedValue = cachedValue.toString()
+    // calculatorDisplay.innerText = displayValue;
+    // cachedDisplay.innerText = cachedValue;
 }
 
 
-// function subtract () {
-//     if(displayValue && cachedValue != null) {
-//         cachedValue -= parseFloat(displayValue);
-//         displayValue =''
-//     }
-//     if (cachedValue == null){
-//         cachedValue = parseFloat(displayValue);
-//         displayValue=''
-//     }
-//     updateDisplay();
-// }
 
 //equals 
     
